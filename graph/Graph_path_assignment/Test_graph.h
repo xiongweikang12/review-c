@@ -37,8 +37,8 @@ public:
 		
 	}
 	bool is_legal_object(); 
-	//ÅĞ¶ÏÊÇ·ñºÏ·¨
-	//´óĞ¡Ò»ÑùºÍGraph_size
+	//åˆ¤æ–­æ˜¯å¦åˆæ³•
+	//å¤§å°ä¸€æ ·å’ŒGraph_size
 	
 	inline int getGraph_size()
 	{
@@ -55,8 +55,9 @@ public:
 	void init_Graph_catity();
 	void set_Graph_catity(const float[Maxsize][Maxsize]);
 	vector<string> short_path(int start,int end, bool is_label);
-	//·µ»Ø×îĞ¡Â·¾¶
+	//è¿”å›æœ€å°è·¯å¾„
 	void set_Graph_label(const string_point source);
+	map<vector<int>,float> get_flow(){return Graph_flow;}
 
 
 	
@@ -64,12 +65,12 @@ public:
 
 private:
 
-	int Graph_size; //Í¼µÄ´óĞ¡
-	float Graph_catity[Maxsize][Maxsize]; //Í¼µÄÂ·¾¶
-	map<vector<int>, float> Graph_flow; //Í¼µÄÁ÷Á¿
-	float Graph_flow_assignment[Maxsize][Maxsize]; //Á÷Á¿·ÖÅä
-	string *Graph_label; //Í¼µÄ±êÇ©
-	float Graph_flow_matType[Maxsize][Maxsize];//Í¼Á÷Á¿µÄ¾ØÕóĞÎÊ½
+	int Graph_size; //å›¾çš„å¤§å°
+	float Graph_catity[Maxsize][Maxsize]; //å›¾çš„è·¯å¾„
+	map<vector<int>, float> Graph_flow; //å›¾çš„æµé‡
+	float Graph_flow_assignment[Maxsize][Maxsize]; //æµé‡åˆ†é…
+	string *Graph_label; //å›¾çš„æ ‡ç­¾
+	float Graph_flow_matType[Maxsize][Maxsize];//å›¾æµé‡çš„çŸ©é˜µå½¢å¼
 
 };
 
