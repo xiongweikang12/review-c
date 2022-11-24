@@ -43,12 +43,24 @@ int main()
 	a.set_Graph_catity(arr);
 	a.show_Graph_catity();
 	
-	auto short_path = a.short_path(0, 2, true);
+	/*
 	for (auto i : short_path)
 	{
 		cout << i << "->";
 	}
-
+	*/
+	
+	for (auto i:a.get_flow())
+	{
+		auto short_path = a.short_path(i.first[0], i.first[1], true);
+		for (auto j : short_path)
+		{
+		cout << j << "->";
+		}
+		
+		
+	}
+	
 	a.show_Graph_flow_assignment();
 
 	
