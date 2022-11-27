@@ -52,7 +52,10 @@ int main()
 	
 	for (auto i:a.get_flow())
 	{
-		auto short_path = a.short_path(i.first[0], i.first[1], true);
+		auto start=i.first[0];
+		auto end=i.first[1];
+		auto short_path = a.short_path(start,end, true);
+		cout << start << "->" << end << "\t" << ":";
 		for (auto j : short_path)
 		{
 		cout << j << "->";
