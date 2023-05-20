@@ -40,8 +40,9 @@ int Lnode_stack_pop(L_Lnode_Stack inin_stack_L , int  *const getpop)
 		*getpop = inin_stack_L->next->data;
 		Lnode_Stack* free_pointer = inin_stack_L->next;
 		inin_stack_L->next = inin_stack_L->next->next;
+		free_pointer->next = NULL;
 		free(free_pointer);//释放结点
-		(--inin_stack_L->lenght);
+		--(inin_stack_L->lenght);
 		return 1;
 	}
 }
@@ -66,14 +67,15 @@ int current_stack_length(L_Lnode_Stack inin_stack_L)
 
 void Destory_Link_stack(L_Lnode_Stack inin_stack_L)
 {
-	if (!current_stack_length(inin_stack_L)) { //连头结点都给你释放了 }
+	if (current_stack_length(inin_stack_L)==0) { //连头结点都给你释放了 }
 	}
 	else
 	{
-		int* const temp = 0;
-		while (current_stack_length(init_Lnode_stack))
+		int temp_2 = 1;
+		int* const temp = &temp_2;
+		while (current_stack_length(inin_stack_L))  //传入实参
 		{
-			Lnode_stack_pop(init_Lnode_stack, temp);
+			Lnode_stack_pop(inin_stack_L, temp);
 		}
 	}
 }

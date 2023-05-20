@@ -64,11 +64,8 @@ void main()
 		get=Lnode_stack_push(L1, 4);
 		get=Lnode_stack_pop(L1, temp);
 		printf("%d\n",current_stack_length(L1)); // 长度为3
-		// Destory_Link_stack(L1);
-		// printf("%d\n",current_stack_length(L1)); //长度为0
-
-
-		
+		Destory_Link_stack(L1);
+		printf("%d\n",current_stack_length(L1)); //长度为0
 	}
 	
 }

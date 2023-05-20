@@ -1,2 +1,6 @@
-﻿  main.c
+﻿  function_Link_Stack.c
+  main.cpp
+  stack_appliance.cpp
+  正在生成代码...
+x64\Debug\main.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
   stack_review.vcxproj -> D:\source\repos\stack_review\x64\Debug\stack_review.exe

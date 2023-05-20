@@ -143,14 +143,17 @@
     <ClCompile Include="function_stack_review.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="function_quene.c" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="readme.c" />
     <ClCompile Include="readme_quene.c" />
+    <ClCompile Include="stack_appliance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LInk_stack.h" />
     <ClInclude Include="participance_stack.h" />
     <ClInclude Include="quene.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="stack_appliance.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
