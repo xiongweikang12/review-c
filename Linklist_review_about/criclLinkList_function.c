@@ -11,7 +11,7 @@ cLinkList CreatcLinkList(void)
 
 cLinkList InitcLinkList(cLinkList cL)
 {	
-	cLinkList cL_rear = cL; //¼ÓÉÏÎ²Ö¸Õë
+	cLinkList cL_rear = cL; //ï¿½ï¿½ï¿½ï¿½Î²Ö¸ï¿½ï¿½
 	if (cL)
 	{
 		cL->next = cL;
@@ -42,12 +42,40 @@ cLinkList Bulid_cL(cLinkList cL_head)
 				cL_rear->next = cLnew;
 				cL_rear = cLnew;
 				continue;
+				//Í·ï¿½å·¨
 
 			}
 		}
 	}
-	return cL_rear; //·µ»ØÎ²Ö¸Õë
+	return cL_rear; //ï¿½ï¿½ï¿½ï¿½Î²Ö¸ï¿½ï¿½
 }
+
+cLinkList Bulid_cL_rear(cLinkList cL_head)
+{
+	cLinkList cL_rear = cL_head;
+	int content = 0;
+	while (True)
+	{
+		printf("please input:");
+		scanf_s("%d", &content);
+		if (content == -1)
+		{
+			break;
+		}
+		else
+		{
+			cLnode* cLnew = (cLnode*)malloc(sizeof(cLnode));
+			if (cLnew)
+			{
+				cLnew->next = cL_rear->next; //ï¿½Â½Úµï¿½ï¿½ÎªÎ²ï¿½Í½Úµï¿½
+				cL_rear->next = cLnew;//Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½Ö¸ï¿½ï¿½ï¿½Â½Úµï¿½
+				cL_rear=cLnew//Î²Ö¸ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Â½Úµã´¦
+			}
+		}
+	}
+	return cL_rear; //ï¿½ï¿½ï¿½ï¿½Î²Ö¸ï¿½ï¿½
+}
+
 
 int isEmpty(cLinkList cL_head)
 {
@@ -55,7 +83,7 @@ int isEmpty(cLinkList cL_head)
 	{
 		if (cL_head->next == cL_head)
 		{
-			return ERROR; //±íÊ¾Îª¿Õ±í
+			return ERROR; //ï¿½ï¿½Ê¾Îªï¿½Õ±ï¿½
 		}
 		else
 		{
@@ -70,10 +98,10 @@ int visitcL(cLinkList cL_head)
 	if (isEmpty(cL_head))
 	{
 		int connter = 1;
-		cLinkList p = cL_head->next; //´ÓµÚÒ»¸ö½áµãÆð±éÀú
+		cLinkList p = cL_head->next; //ï¿½Óµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		while (p->next!=cL_head)
 		{
-			printf("µÚ%d:%d->", connter, p->data);
+			printf("ï¿½ï¿½%d:%d->", connter, p->data);
 			p = p->next;
 			connter++;
 		}
@@ -89,10 +117,10 @@ int LenghtcL(cLinkList cL_head)
 	{
 		
 		int connter = 1;
-		cLinkList p = cL_head->next;//´ÓµÚÒ»¸ö½áµãÆð±éÀú
+		cLinkList p = cL_head->next;//ï¿½Óµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		while (p->next != cL_head)
 		{
-			printf("µÚ%d:%d->", connter, p->data);
+			printf("ï¿½ï¿½%d:%d->", connter, p->data);
 			p = p->next;
 			connter++;
 		}
@@ -104,7 +132,7 @@ int LenghtcL(cLinkList cL_head)
 	}
 }
 
-int getelemcL(cLinkList cL_rear,cLinkList cL_head, int position) //Êµ¼Ê·µ»ØÀàÐÍ(elemtype)×Ô¶¨£¨ÕâÀïÓÃint)
+int getelemcL(cLinkList cL_rear,cLinkList cL_head, int position) //Êµï¿½Ê·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(elemtype)ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½int)
 {
 	int len = LenghtcL(cL_head);
 	if (isEmpty(cL_head) || position>len)
@@ -125,12 +153,12 @@ int getelemcL(cLinkList cL_rear,cLinkList cL_head, int position) //Êµ¼Ê·µ»ØÀàÐÍ(
 		else
 		{	
 			int connter = 1;
-			cLinkList p = cL_head->next; //´ÓµÚÒ»¸ö½áµãÆð±éÀú
+			cLinkList p = cL_head->next; //ï¿½Óµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			while (p->next != cL_head)
 			{
 				if (connter == position)
 				{
-					// printf("µÚ%d:%d->", connter, p->data);
+					// printf("ï¿½ï¿½%d:%d->", connter, p->data);
 					return p->data;
 				}
 				p = p->next;
