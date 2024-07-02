@@ -9,7 +9,6 @@
 int init_tree_child(tree_child* T_c)
 {
 	//给分配空间
-	T_c->c_tree = (struct cbox*)malloc(sizeof(struct cbox)*Maxsize);
 	T_c->num = 0;
 	return 1;
 }
@@ -26,7 +25,9 @@ int creat_tree__child(tree_child* T_c)
 		temp = getchar();
 		if (input_info!='k')
 		{
-			T_c->c_tree[T_c->num++].info = input_info;
+			T_c->c_tree[T_c->num].info = input_info;
+			T_c->c_tree[T_c->num].frist_child = NULL;
+			T_c->num++;
 			printf("\n");
 		}
 		else
@@ -36,7 +37,6 @@ int creat_tree__child(tree_child* T_c)
 		
 
 	}
-	T_c->num++;
 	printf("%d \n", T_c->num);
 	return 1;
 }
@@ -46,39 +46,43 @@ int build_child_tree(tree_child* T_c)
 	int flag_node_next = 1;
 	for (int i = 0; i < T_c->num; i++)
 	{
+		int counter = 0;
 		printf("please input flag_node_next：");
 		scanf_s("%d", &flag_node_next);
-		if (flag_node_next==1){}
+		if (flag_node_next!=0){}
 		else 
-		{ T_c->c_tree->frist_child = NULL;
+		{ T_c->c_tree[i].frist_child = NULL; //正确的逻辑部分
 			continue;
 		}
 		int flag = 1; 
 		int child_index = -1;
-		tree_child_node* rear = T_c->c_tree->frist_child;
+		tree_child_node* rear = T_c->c_tree[i].frist_child;
 		while (flag)
 		{
 			tree_child_node* child_node = (tree_child_node*)malloc(sizeof(tree_child_node));
+			child_node->next_child = NULL;
 			printf("please input index:");
 			while (1)
 			{
 				scanf_s("%d", &child_index);
-				if (child_index <= T_c->num && child_index >= 0) { break; }
+				if (child_index <= T_c->num && child_index >= 0 && child_index!=i) { break; }
 				else { continue; }
 			}
 			child_node->child_index = child_index;
-			// T_c->c_tree->frist_child = child_node;
+			if (counter == 0) { T_c->c_tree[i].frist_child = child_node; }
+			else { counter++; }
+			child_node->next_child = rear;
 			rear = child_node;
-			child_node->next_child = NULL;
 			printf("please input flag:");
 			scanf_s("%d", &flag); //flag非0 表示还孩子，0表示结束
 		}
+
 	}
 
 	return 0;
 }
 
-int return_child(tree_child* C_T, char target_node, char* child_node_return)
+int return_child(tree_child* C_T, const char target_node, char* child_node_return)
 {
 	int count = 0;
 	for (int i = 0; i < C_T->num; i++)
@@ -97,5 +101,5 @@ int return_child(tree_child* C_T, char target_node, char* child_node_return)
 			continue;
 		}
 	}
-	return count + 1;
+	return count;
 }

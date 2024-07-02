@@ -19,10 +19,10 @@ typedef struct cbox
 
 typedef struct c_tree_one{
 	int num; //表示树的节点个数
-	tree_child_box* c_tree;
+	tree_child_box c_tree[Maxsize];
 }tree_child;
 
 int init_tree_child(tree_child*);
 int creat_tree__child(tree_child*); //创建box_node
 int build_child_tree(tree_child*); //建立表示孩纸
-int return_child(tree_child*, char, char*);//返回某个节点的孩子数，保存在某个数组中
+int return_child(tree_child*, const char, char*);//返回某个节点的孩子数，保存在某个数组中
