@@ -34,8 +34,6 @@ int creat_tree__child(tree_child* T_c)
 		{
 			break;
 		}
-		
-
 	}
 	printf("%d \n", T_c->num);
 	return 1;
@@ -74,7 +72,7 @@ int build_child_tree(tree_child* T_c)
 			child_node->next_child = rear;
 			rear = child_node;
 			printf("please input flag:");
-			scanf_s("%d", &flag); //flag非0 表示还孩子，0表示结束
+			scanf_s("%d", &flag); //flag非0 表示还有孩子，0表示结束
 		}
 
 	}
@@ -102,4 +100,30 @@ int return_child(tree_child* C_T, const char target_node, char* child_node_retur
 		}
 	}
 	return count;
+}
+
+tree_child_box return_parent(tree_child *CT, const char target_node)
+{
+	//根据target_node,及孩子节点，找到双亲 //注意双亲是唯一的
+	for (int i = 0; i <CT->num; i++)
+	{
+		if (CT->c_tree[i].frist_child != NULL)
+		{
+			tree_child_node *op_pointer= (tree_child_node*)malloc(sizeof(tree_child_node));
+			op_pointer = CT->c_tree[i].frist_child;
+			while (op_pointer)
+			{
+				if (target_node == CT->c_tree[op_pointer->child_index].info)
+				{
+					return CT->c_tree[i];
+				}
+				op_pointer = op_pointer->next_child;
+			}
+		}
+		else
+		{
+			continue;
+		}
+	}
+
 }

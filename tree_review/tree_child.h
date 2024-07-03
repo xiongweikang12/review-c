@@ -26,3 +26,4 @@ int init_tree_child(tree_child*);
 int creat_tree__child(tree_child*); //创建box_node
 int build_child_tree(tree_child*); //建立表示孩纸
 int return_child(tree_child*, const char, char*);//返回某个节点的孩子数，保存在某个数组中
+tree_child_box return_parent(tree_child*, const char);//返回双亲

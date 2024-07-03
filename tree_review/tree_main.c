@@ -10,6 +10,8 @@ int main()
 	build_child_tree(Tc);
 	char* return_child1 = (char*)malloc(sizeof(char) * Maxsize);
 	int child_num = return_child(Tc, 'A', return_child1);
-	printf("%d", child_num);
+	printf("A的孩子数目%d\n", child_num);
+	printf("A的孩子有：%c,%c\n", return_child1[0], return_child1[1]);
+	printf("B的parent为%c\n", return_parent(Tc, 'B').info);
 	return 1;
 }
