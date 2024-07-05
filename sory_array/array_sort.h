@@ -25,5 +25,6 @@ int get_top(int);
 int heap_big(Sqlist*);
 int heap_small(Sqlist*);
 int heap_sort_check(Sqlist*,int(*build_head)(Sqlist *)); //建立打大根堆，或小大根堆
+void heap_sort(Sqlist*, Sqlist*);//堆排序
 
 

@@ -107,6 +107,7 @@ void Choice_Sort(Sqlist* L)
 		}
 	}
 }
+
 int partion(Sqlist* L, int left, int right)
 {
 	redtype priv = L->r[left];
@@ -136,6 +137,7 @@ void quick_Sort(Sqlist* L, int left, int right)
 		quick_Sort(L, pos + 1, right);
 	}
 }
+
 int get_top(int now_node)
 {
 	if (now_node%2==0 &&now_node!=0)
@@ -159,37 +161,15 @@ int heap_big(Sqlist* L)
 		int fun_counter = i;
 		while (1)
 		{
-			if (i > 0 && L->r[i].key > L->r[get_top(fun_counter)].key)
+			if (i > 0 && L->r[fun_counter].key > L->r[get_top(fun_counter)].key)
 			{
 				redtype temp = L->r[get_top(fun_counter)];
 				L->r[get_top(fun_counter)] = L->r[fun_counter];
 				L->r[fun_counter] = temp;
-			}
-			if (get_top(fun_counter)==-1)
-			{
-				break;
 			}
 			else
 			{
-				fun_counter = get_top(fun_counter);
-				continue;
-			}
-		}
-	}
-}
-
-int heap_small(Sqlist* L)
-{
-	for (int i = 0; i < L->length; i++)
-	{
-		int fun_counter = i;
-		while (1)
-		{
-			if (i > 0 && L->r[i].key < L->r[get_top(fun_counter)].key)
-			{
-				redtype temp = L->r[get_top(fun_counter)];
-				L->r[get_top(fun_counter)] = L->r[fun_counter];
-				L->r[fun_counter] = temp;
+				break;
 			}
 			if (get_top(fun_counter) == -1)
 			{
@@ -202,6 +182,38 @@ int heap_small(Sqlist* L)
 			}
 		}
 	}
+	return 1;
+}
+
+int heap_small(Sqlist* L)
+{
+	for (int i = 0; i < L->length; i++)
+	{
+		int fun_counter = i;
+		while (1)
+		{
+			if (i > 0 && L->r[fun_counter].key < L->r[get_top(fun_counter)].key)
+			{
+				redtype temp = L->r[get_top(fun_counter)];
+				L->r[get_top(fun_counter)] = L->r[fun_counter];
+				L->r[fun_counter] = temp;
+			}
+			else
+			{
+				break;
+			}
+			if (get_top(fun_counter) == -1)
+			{
+				break;
+			}
+			else
+			{
+				fun_counter = get_top(fun_counter);
+				continue;
+			}
+		}
+	}
+	return 1;
 }
 
 int heap_sort_check(Sqlist* L, int(*build_head)(Sqlist*))
@@ -214,5 +226,13 @@ int heap_sort_check(Sqlist* L, int(*build_head)(Sqlist*))
 	return build_head(L);
 }
 
+void heap_sort(Sqlist* push_L, Sqlist* pull_L)
+{
+	//push_L传入堆，pull_L排序后传出堆
 
 
+
+
+
+
+}//堆排序
