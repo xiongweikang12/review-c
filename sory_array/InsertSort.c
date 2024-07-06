@@ -154,6 +154,16 @@ int get_top(int now_node)
 	}
 }
 
+int get_button_left(int now_node)
+{
+	return (now_node * 2) + 1;
+}
+
+int get_button_right(int now_node)
+{
+	return (now_node * 2) + 2;
+}
+
 int heap_big(Sqlist* L)
 {
 	for (int i = 0; i < L->length; i++)
@@ -226,13 +236,18 @@ int heap_sort_check(Sqlist* L, int(*build_head)(Sqlist*))
 	return build_head(L);
 }
 
+
 void heap_sort(Sqlist* push_L, Sqlist* pull_L)
 {
 	//push_L传入堆，pull_L排序后传出堆
-
-
-
-
-
+	//大根堆降序，小根堆升序
+	static int  j = 0;
+	for (int i = push_L->length-1; i >=0 ; i--)
+	{
+		pull_L->r[j++] = push_L->r[0];
+		push_L->r[0] = push_L->r[i];
+		push_L->length--;
+		heap_big(push_L);
+	}
 
 }//堆排序
