@@ -139,7 +139,7 @@ int treeleave_num(Tree T)
 }
 
 //返回一个tree_node指针
-Treenode* return_node(Tree T,const int target_node)
+/*Treenode* return_node(Tree T, const int target_node)
 {
 	if (T==NULL)
 	{
@@ -154,10 +154,11 @@ Treenode* return_node(Tree T,const int target_node)
 		else
 		{
 			return_pro(T->left, target_node);
-			return_prp(T->right, target_node);
+			return_pro(T->right, target_node);
 		}
 	}
 }
+
 
 //返回一个兄弟的指针
 Treenode* return_pro(Tree T, const Treenode* pro)
@@ -178,6 +179,7 @@ Treenode* return_pro(Tree T, const Treenode* pro)
 			return_prp(T->right, pro);
 		}
 	}
+	return NULL;
 }
 
 void chang_mod(Tree* T)
@@ -185,34 +187,63 @@ void chang_mod(Tree* T)
 
 }
 
-Tree build_hf(int* hf_data)
+*/
+
+Tree build_hf(int hf_data[],int len)
 {
 	int i = 0;
 	int counter = 0;
 	int tree_node_num = 0;
-	Treenode* all[10];
-	while (hf_data[i++]!='/0'){
+	Tree all[20];
+	for (int i = 0; i < len*2; i++)
+	{
+		Tree temp = (Tree)malloc(sizeof(Treenode));
+		all[i] = temp;
+	}
+
+	for (int i = 0; i < len; i++)
+	{
 		all[i]->data = hf_data[i];
 		all[i]->left = NULL;
 		all[i]->right = NULL;
+
 	}
-	tree_node_num = (2 * (i+1)) - 1;
-	counter = i;
-	Tree new = all[0];
+
+	tree_node_num = (2 * (len+1)) - 1;
+	counter = len;
 	
-	for (int j = counter; j > 2; j--)
+	for (int j = counter; j > 1; j--)
 	{
-		Insert_Sort(all, j);
+		Bubbling_Sort(all, j);
 		Treenode* new = (Treenode*)malloc(sizeof(Treenode));//创建一个
 		new->left = all[0];
 		new->right = all[1];
 		new->data = all[0]->data + all[1]->data;
-		ListDelete(all, 0,j);
-		ListDelete(all, 1, j);
-		all[j] = new;
-
+		ListDelete(all, 0,j+1);
+		ListDelete(all, 0, j+1);
+		all[j-2] = new;
 	}
-	return new;
+	return all[0];
+}
+
+void Bubbling_Sort(Treenode* L[], int len)
+{
+	for (int i = 0; i < len - 1; i++)
+	{
+		for (int j = 0; j < (len- i - 1); j++)
+		{
+			if (L[j + 1]->data <= L[j]->data)
+			{
+				Treenode* swap = L[j];
+				L[j] = L[j + 1];
+				L[j + 1] = swap;
+			}
+			else
+			{
+				continue;
+			}
+		}
+	}
 }
 
 void Insert_Sort(Treenode* L[],int len)
@@ -251,5 +282,10 @@ void ListDelete(Treenode* L[], int index,int len)
 			L[i - 1] = L[i];
 		}
 	}
-	return 0;
+}
+
+void test_hf(void)
+{
+	int a[] = { 1,2,3,4 };
+	PreOrderTraverse(build_hf(a,4));
 }
