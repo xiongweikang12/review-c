@@ -41,4 +41,6 @@ void Bubbling_Sort(Treenode* L[], int len);
 Tree build_hf(int *,int);
 void Insert_Sort(Treenode* L[], int len);
 void ListDelete(Treenode* L[], int index, int len);
+char* return_code_bynode(Tree, Treenode*);
+int PreOrderTraverse_hf(Tree T, int tag, Treenode*);
 void test_hf();

@@ -289,3 +289,27 @@ void test_hf(void)
 	int a[] = { 1,2,3,4 };
 	PreOrderTraverse(build_hf(a,4));
 }
+
+int PreOrderTraverse_hf(Tree T,Treenode* leave_node,char *p)
+{
+	static int counter = 0;
+	if (T == leave_node)
+	{
+		return OK;
+	}
+	else
+	{
+		PreOrderTraverse_hf(T->left,leave_node,p);
+		p[counter++] = '1';
+		PreOrderTraverse(T->right,leave_node,p);
+		p[counter++] = '0';
+	}
+	return OK;
+}
+
+char* return_code_bynode(Tree T, Treenode* leave_node)
+{
+	char* leave_code = (char*)(malloc(sizeof(char) * 10));
+	PreOrderTraverse_hf(T, leave_node, leave_code);
+	return leave_code;
+}// 根据建好的哈夫曼树，得到叶子节点的编码
