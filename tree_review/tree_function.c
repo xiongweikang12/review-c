@@ -5,7 +5,7 @@
 
 
 //先序
-int PreOrderTraverse(Tree T)
+int _stdcall PreOrderTraverse(Tree T)
 {
 	if (T == NULL)
 	{
@@ -21,7 +21,7 @@ int PreOrderTraverse(Tree T)
 }
 
 //中序
-int InOrderTraverse(Tree T)
+int _stdcall InOrderTraverse(Tree T)
 {
 	if (T == NULL)
 	{
@@ -37,7 +37,7 @@ int InOrderTraverse(Tree T)
 }
 
 //后序
-int postOrderTraverse(Tree T)
+int _stdcall postOrderTraverse(Tree T)
 {
 	if (T == NULL)
 	{
@@ -54,7 +54,7 @@ int postOrderTraverse(Tree T)
 
 
 /*按照先序建立二叉树二叉链表*/
-void creattree(Tree* T,int tag)
+void _stdcall creattree(Tree* T,int tag)
 {	//通过二级指针，因为树的数据结构在递归中总是对一级指针操作
 	//导致一级指针在经过函数后会发生变化
 	//通过二级指针操作则避免了
@@ -81,7 +81,7 @@ void creattree(Tree* T,int tag)
 }
 
 //复制
-int copytree(Tree T, Tree* NT)
+int _stdcall copytree(Tree T, Tree* NT)
 {
 	if (T == NULL)
 	{
@@ -97,7 +97,7 @@ int copytree(Tree T, Tree* NT)
 }
 
 //树的深度
-int depthtree(Tree T)
+int _stdcall depthtree(Tree T)
 {
 	if (T == NULL)
 	{
@@ -112,7 +112,7 @@ int depthtree(Tree T)
 }
 
 //树的节点数目
-int treelnode_num(Tree T)
+int _stdcall treelnode_num(Tree T)
 {
 	if (T == NULL)
 	{
@@ -125,7 +125,7 @@ int treelnode_num(Tree T)
 }
 
 //叶子节点数目
-int treeleave_num(Tree T)
+int _stdcall treeleave_num(Tree T)
 {
 	if (T == NULL)
 	{
@@ -189,7 +189,7 @@ void chang_mod(Tree* T)
 
 */
 
-Tree build_hf(int hf_data[],int len)
+Tree _stdcall build_hf(int hf_data[],int len)
 {
 	int i = 0;
 	int counter = 0;
@@ -226,7 +226,7 @@ Tree build_hf(int hf_data[],int len)
 	return all[0];
 }
 
-void Bubbling_Sort(Treenode* L[], int len)
+void _stdcall Bubbling_Sort(Treenode* L[], int len)
 {
 	for (int i = 0; i < len - 1; i++)
 	{
@@ -246,7 +246,7 @@ void Bubbling_Sort(Treenode* L[], int len)
 	}
 }
 
-void Insert_Sort(Treenode* L[],int len)
+void _stdcall Insert_Sort(Treenode* L[],int len)
 {
 	//对顺序表操作，进行插入排序
 	for (int i = 2; i < len; i++)//从第二个位置开始
@@ -267,7 +267,7 @@ void Insert_Sort(Treenode* L[],int len)
 		}
 	}
 }
-void ListDelete(Treenode* L[], int index,int len)
+void _stdcall ListDelete(Treenode* L[], int index,int len)
 {
 	/*
 	两种情况
@@ -284,32 +284,71 @@ void ListDelete(Treenode* L[], int index,int len)
 	}
 }
 
-void test_hf(void)
+void _stdcall test_hf(void)
 {
 	int a[] = { 1,2,3,4 };
-	PreOrderTraverse(build_hf(a,4));
+	int counter = 0;
+	Tree temp = build_hf(a, 4);
+	PreOrderTraverse(temp);
+	printf("temp.right.rigth的叶子节点编码%d\n", temp->right->right->data);
+	char *return_= return_code_bynode(temp, temp->right->right);
+	
 }
 
-int PreOrderTraverse_hf(Tree T,Treenode* leave_node,char *p)
+int _stdcall is_parent(Treenode* top, Treenode* low)
 {
-	static int counter = 0;
-	if (T == leave_node)
+
+	if (top->left==NULL&&top->right==NULL)
 	{
-		return OK;
+		return 0;
+	}
+	if (top->left==low ||top->right==low)
+	{
+		return 1;
+	}
+	return is_parent(top->left, low)||is_parent(top->right ,low);
+	
+}
+//不采用递归算法了
+int InOrderTraverse_hf(Tree T,Treenode* leave_node,char p[])
+{
+	static int flag = 1;
+	static int counter = 0;
+	if (T->left==NULL&&T->right==NULL) //表示是目标节点
+	{
+		if (T == leave_node)
+		{
+			return OK;
+		}
 	}
 	else
 	{
-		PreOrderTraverse_hf(T->left,leave_node,p);
-		p[counter++] = '1';
-		PreOrderTraverse(T->right,leave_node,p);
-		p[counter++] = '0';
+		InOrderTraverse_hf(T->left,leave_node,p);
+		if (is_parent(T,leave_node)||T==leave_node)
+		{
+			if (T == leave_node)
+			{
+				return OK;
+			}
+			p[counter++] = '1';
+		}
+		InOrderTraverse_hf(T->right,leave_node,p);
+		if (is_parent(T,leave_node)||T==leave_node)
+		{
+			if (T == leave_node)
+			{
+				return OK;
+			}
+			p[counter++] = '0';
+		}
+		
 	}
 	return OK;
 }
 
 char* return_code_bynode(Tree T, Treenode* leave_node)
 {
-	char* leave_code = (char*)(malloc(sizeof(char) * 10));
-	PreOrderTraverse_hf(T, leave_node, leave_code);
+	char leave_code[10];
+	InOrderTraverse_hf(T, leave_node, leave_code);
 	return leave_code;
 }// 根据建好的哈夫曼树，得到叶子节点的编码

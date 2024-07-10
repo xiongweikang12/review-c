@@ -6,14 +6,14 @@
 
 
 
-int init_tree_child(tree_child* T_c)
+int _stdcall init_tree_child(tree_child* T_c)
 {
 	//给分配空间
 	T_c->num = 0;
 	return 1;
 }
 
-int creat_tree__child(tree_child* T_c)
+int _stdcall creat_tree__child(tree_child* T_c)
 {
 	init_tree_child(T_c);
 	char temp = '0';
@@ -39,7 +39,7 @@ int creat_tree__child(tree_child* T_c)
 	return 1;
 }
 
-int build_child_tree(tree_child* T_c)
+int _stdcall build_child_tree(tree_child* T_c)
 {
 	int flag_node_next = 1;
 	for (int i = 0; i < T_c->num; i++)
@@ -80,7 +80,7 @@ int build_child_tree(tree_child* T_c)
 	return 0;
 }
 
-int return_child(tree_child* C_T, const char target_node, char* child_node_return)
+int _stdcall return_child(tree_child* C_T, const char target_node, char* child_node_return)
 {
 	int count = 0;
 	for (int i = 0; i < C_T->num; i++)
@@ -102,7 +102,7 @@ int return_child(tree_child* C_T, const char target_node, char* child_node_retur
 	return count;
 }
 
-tree_child_box return_parent(tree_child *CT, const char target_node)
+tree_child_box _stdcall return_parent(tree_child *CT, const char target_node)
 {
 	//根据target_node,及孩子节点，找到双亲 //注意双亲是唯一的
 	for (int i = 0; i <CT->num; i++)
